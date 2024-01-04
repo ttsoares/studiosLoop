@@ -138,8 +138,39 @@ describe("Navigation", () => {
   it.only("Hover states", () => {
     cy.visit("http://localhost:3000/");
 
-    cy.get('[cy-test="creations"')
-      .get('[cy-test="Deep Earth"]')
-      .click({ force: true });
+    cy.get('[cy-test="Deep Earth"]')
+      .realHover("mouse")
+      .get('[cy-test="overlay-Deep Earth"]')
+      .should("be.visible");
+
+    cy.get('[cy-test="Night Arcade"]')
+      .realHover("mouse")
+      .get('[cy-test="overlay-Night Arcade"]')
+      .should("be.visible");
+
+    cy.get('[cy-test="Soccer Team VR"]')
+      .realHover("mouse")
+      .get('[cy-test="overlay-Soccer Team VR"]')
+      .should("be.visible");
+
+    cy.get('[cy-test="The Grid"]')
+      .realHover("mouse")
+      .get('[cy-test="overlay-The Grid"]')
+      .should("be.visible");
+
+    cy.get('[cy-test="From Up Above VR"]')
+      .realHover("mouse")
+      .get('[cy-test="overlay-From Up Above VR"]')
+      .should("be.visible");
+
+    cy.get('[cy-test="Pocket Borealis"]')
+      .realHover("mouse")
+      .get('[cy-test="overlay-Pocket Borealis"]')
+      .should("be.visible");
+
+    cy.get('[cy-test="Make It Fisheye"]')
+      .realHover("mouse")
+      .get('[cy-test="overlay-Make It Fisheye"]')
+      .should("be.visible");
   });
 });

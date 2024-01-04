@@ -8,14 +8,3 @@
   }
 }
 
-.item-container {
-  @apply flex flex-col justify-between w-full space-y-6 text-2xl text-white uppercase md:flex-row md:space-y-0 md:space-x-8;
-}
-
-.item {
-  @apply relative overflow-hidden;
-}
-
-.item-gradient {
-  @apply absolute top-0 bottom-0 right-0 left-0 bg-gradient-to-b from-transparent to-gray-900 group-hover:from-gray-50 group-hover:to-white group-hover:opacity-70;
-}

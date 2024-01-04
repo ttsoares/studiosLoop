@@ -20,7 +20,10 @@ const Creations = () => {
 
       <div className="w-full grid grid-cols-1 md:grid-cols-4 gap-4 text-2xl text-white uppercase ">
         {CREATIONS.map((item, index) => (
-          <div key={index} className="group item hover:cursor-pointer">
+          <div
+            key={index}
+            className="group relative overflow-hidden hover:cursor-pointer"
+          >
             <Image
               cy-test={item.text}
               src={item.imgDsk}
@@ -36,7 +39,10 @@ const Creations = () => {
               height={464}
               className="w-full md:hidden"
             />
-            <div className="item-gradient"></div>
+            <div
+              cy-test={`overlay-${item.text}`}
+              className="absolute top-0 bottom-0 right-0 left-0 bg-gradient-to-b from-transparent to-gray-900 group-hover:from-gray-50 group-hover:to-white group-hover:opacity-70"
+            ></div>
             <h5>{item.text}</h5>
           </div>
         ))}

@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <section className="w-full -my-32">
       {/* Hero */}
-      <div className="w-full h-[650px] relative">
+      <div cy-test="hero" className="w-full h-[650px] relative">
         <Image
           src="/imgs/desktop/image-hero.jpg"
           alt="background desktop"
@@ -31,7 +31,7 @@ export default function Home() {
       </div>
 
       {/* Feature */}
-      <div className="md:mb-60">
+      <div cy-test="feature" className="md:mb-60">
         <div className="relative  flex flex-col max-w-6xl mx-auto my-32 px-6 text-gray-900 md:flex-row md:px-0 z-20">
           <Image
             src="/imgs/desktop/image-interactive.jpg"

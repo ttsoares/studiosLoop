@@ -5,7 +5,10 @@ import CREATIONS from "@/public/consts/creations";
 
 const Creations = () => {
   return (
-    <div className="container max-w-6xl mx-auto my-36 px-6 text-gray-900 md:px-0">
+    <div
+      cy-test="creations"
+      className="container max-w-6xl mx-auto my-36 px-6 text-gray-900 md:px-0"
+    >
       <div className="flex items-center justify-center mb-20 md:justify-between">
         <h2 className="text-4xl text-center uppercase md:text-left md:text-5xl">
           Our Creations
@@ -19,6 +22,7 @@ const Creations = () => {
         {CREATIONS.map((item, index) => (
           <div key={index} className="group item hover:cursor-pointer">
             <Image
+              cy-test={item.text}
               src={item.imgDsk}
               alt={item.text}
               width={262}

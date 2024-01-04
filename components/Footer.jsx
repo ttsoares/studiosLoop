@@ -9,7 +9,7 @@ import MID_SOC from "@/public/consts/social_med";
 
 const Footer = () => {
   return (
-    <footer className="bg-black">
+    <footer cy-test="footer" className="bg-black">
       <div className="container max-w-6xl py-10 mx-auto">
         <div className="flex flex-col items-center mb-8 space-y-6 md:flex-row md:space-y-0 md:justify-between md:items-start">
           <div className="flex flex-col items-center space-y-8 md:items-start md:space-y-4">
@@ -23,7 +23,9 @@ const Footer = () => {
             <div className="flex flex-col items-center space-y-4 font-bold text-white md:flex-row md:space-y-0 md:space-x-6 md:ml-3">
               {MENU_ITENS.map((item, index) => (
                 <div key={index} className="h-10 group">
-                  <Link href={item.link}>{item.text}</Link>
+                  <Link cy-test={item.link} href={item.link}>
+                    {item.text}
+                  </Link>
                   <div className="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
                 </div>
               ))}
@@ -36,8 +38,9 @@ const Footer = () => {
                 <div key={index} className="h-10 group">
                   <Link href={item.link}>
                     <Image
+                      cy-test={item.image}
                       src={item.image}
-                      alt=""
+                      alt={item.link}
                       className="h-7 group-hover:border-b-2 pb-1 group-hover:border-white"
                       width={20}
                       height={20}

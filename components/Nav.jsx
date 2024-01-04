@@ -26,7 +26,10 @@ const Nav = () => {
   }
 
   return (
-    <section className="w-full pt-10 lg:my-4 h-24 lg:h-26 flex items-center justify-between md:justify-start relative px-10 md:px-20 z-20 text-white">
+    <section
+      cy-test="nav"
+      className="w-full pt-10 lg:my-4 h-24 lg:h-26 flex items-center justify-between md:justify-start relative px-10 md:px-20 z-20 text-white"
+    >
       <Link href="/">
         <div className="h-10 w-26 flex hover:animate-pulse">
           <Image src={Logo} alt="Logo LoopStudio" />
@@ -67,7 +70,9 @@ const Nav = () => {
       <div className="hidden md:flex flex-1 h-20 items-center justify-end w-full space-x-6 font-bold text-white">
         {MENU_ITENS.map((item, index) => (
           <div key={index} className="h-10 group">
-            <Link href={item.link}>{item.text}</Link>
+            <Link cy-test={item.link} href={item.link}>
+              {item.text}
+            </Link>
             <div className="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
           </div>
         ))}

@@ -1,27 +1,23 @@
+import CREATIONS from "../../public/consts/creations";
+import MENU from "../../public/consts/menu";
+import SOCMED from "../../public/consts/social_med";
+
+const CRE_2 = CREATIONS.map((elm) => {
+  const arr = elm.imgDsk.split("/");
+  const lastElm = arr[arr.length - 1];
+  return { ...elm, imgDsk: lastElm };
+});
+
 describe("Navigation", () => {
-  it("should navigate to the correct page", () => {
+  it.only("should navigate to the correct page", () => {
     cy.visit("http://localhost:3000/");
 
-    // Nav
-    cy.get('[cy-test="nav"]').find('a[cy-test="/about"]').click();
-    cy.url().should("include", "/about");
-    cy.get("h1").contains("About");
-
-    cy.get('[cy-test="nav"]').find('a[cy-test="/careers"]').click();
-    cy.url().should("include", "/careers");
-    cy.get("h1").contains("Careers");
-
-    cy.get('[cy-test="nav"]').find('a[cy-test="/events"]').click();
-    cy.url().should("include", "/events");
-    cy.get("h1").contains("Events");
-
-    cy.get('[cy-test="nav"]').find('a[cy-test="/products"]').click();
-    cy.url().should("include", "/products");
-    cy.get("h1").contains("Products");
-
-    cy.get('[cy-test="nav"]').find('a[cy-test="/support"]').click();
-    cy.url().should("include", "/support");
-    cy.get("h1").contains("Support");
+    //Nav
+    MENU.forEach((elm) => {
+      cy.get('[cy-test="nav"]').find(`a[cy-test="${elm.link}"]`).click();
+      cy.url().should("include", elm.link);
+      cy.get("h1").contains(elm.text);
+    });
 
     //Footer
     cy.get('[cy-test="footer"]').find('a[cy-test="/about"]').click();
@@ -45,6 +41,7 @@ describe("Navigation", () => {
     cy.get("h1").contains("Support");
   });
 
+  // Testing only images
   it("Test images", () => {
     cy.visit("http://localhost:3000/");
 
@@ -67,45 +64,12 @@ describe("Navigation", () => {
       .should("include", "image-interactive");
 
     // Creations
-    cy.get('[cy-test="creations"')
-      .get('[cy-test="Deep Earth"]')
-      .should("have.attr", "src")
-      .should("include", "deep");
-
-    cy.get('[cy-test="creations"')
-      .get('[cy-test="Night Arcade"]')
-      .should("have.attr", "src")
-      .should("include", "arcade");
-
-    cy.get('[cy-test="creations"')
-      .get('[cy-test="Soccer Team VR"]')
-      .should("have.attr", "src")
-      .should("include", "team");
-
-    cy.get('[cy-test="creations"')
-      .get('[cy-test="The Grid"]')
-      .should("have.attr", "src")
-      .should("include", "grid");
-
-    cy.get('[cy-test="creations"')
-      .get('[cy-test="From Up Above VR"]')
-      .should("have.attr", "src")
-      .should("include", "above");
-
-    cy.get('[cy-test="creations"')
-      .get('[cy-test="Pocket Borealis"]')
-      .should("have.attr", "src")
-      .should("include", "borealis");
-
-    cy.get('[cy-test="creations"')
-      .get('[cy-test="The Curiosity"]')
-      .should("have.attr", "src")
-      .should("include", "curiosity");
-
-    cy.get('[cy-test="creations"')
-      .get('[cy-test="Make It Fisheye"]')
-      .should("have.attr", "src")
-      .should("include", "fisheye");
+    CRE_2.forEach((item) => {
+      cy.get('[cy-test="creations"')
+        .get(`[cy-test="${item.text}"]`)
+        .should("have.attr", "src")
+        .should("include", item.imgDsk);
+    });
 
     //Footer
     cy.get('[cy-test="footer"')
@@ -113,29 +77,16 @@ describe("Navigation", () => {
       .should("have.attr", "src")
       .should("include", "logo");
 
-    cy.get('[cy-test="footer"')
-      .find('img[cy-test="/imgs/icon-facebook.svg"]')
-      .should("have.attr", "src")
-      .should("include", "facebook");
-
-    cy.get('[cy-test="footer"')
-      .find('img[cy-test="/imgs/icon-twitter.svg"]')
-      .should("have.attr", "src")
-      .should("include", "twitter");
-
-    cy.get('[cy-test="footer"')
-      .find('img[cy-test="/imgs/icon-pinterest.svg"]')
-      .should("have.attr", "src")
-      .should("include", "pinterest");
-
-    cy.get('[cy-test="footer"')
-      .find('img[cy-test="/imgs/icon-instagram.svg"]')
-      .should("have.attr", "src")
-      .should("include", "instagram");
+    SOCMED.forEach((elm) => {
+      cy.get('[cy-test="footer"')
+        .find(`img[cy-test="${elm.image}"]`)
+        .should("have.attr", "src")
+        .should("include", elm.image);
+    });
   });
 
   // Hover over images
-  it.only("Hover states", () => {
+  it("Hover states", () => {
     cy.visit("http://localhost:3000/");
 
     cy.get('[cy-test="Deep Earth"]')

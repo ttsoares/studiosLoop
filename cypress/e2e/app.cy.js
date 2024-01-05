@@ -9,7 +9,7 @@ const CRE_2 = CREATIONS.map((elm) => {
 });
 
 describe("Navigation", () => {
-  it.only("should navigate to the correct page", () => {
+  it("should navigate to the correct page", () => {
     cy.visit("http://localhost:3000/");
 
     //Nav
@@ -20,28 +20,15 @@ describe("Navigation", () => {
     });
 
     //Footer
-    cy.get('[cy-test="footer"]').find('a[cy-test="/about"]').click();
-    cy.url().should("include", "/about");
-    cy.get("h1").contains("About");
-
-    cy.get('[cy-test="footer"]').find('a[cy-test="/careers"]').click();
-    cy.url().should("include", "/careers");
-    cy.get("h1").contains("Careers");
-
-    cy.get('[cy-test="footer"]').find('a[cy-test="/events"]').click();
-    cy.url().should("include", "/events");
-    cy.get("h1").contains("Events");
-
-    cy.get('[cy-test="footer"]').find('a[cy-test="/products"]').click();
-    cy.url().should("include", "/products");
-    cy.get("h1").contains("Products");
-
-    cy.get('[cy-test="footer"]').find('a[cy-test="/support"]').click();
-    cy.url().should("include", "/support");
-    cy.get("h1").contains("Support");
+    MENU.forEach((elm) => {
+      cy.get('[cy-test="footer"]').find(`a[cy-test="${elm.link}"]`).click();
+      cy.url().should("include", elm.link);
+      cy.get("h1").contains(elm.text);
+    });
   });
+});
 
-  // Testing only images
+describe("Images", () => {
   it("Test images", () => {
     cy.visit("http://localhost:3000/");
 
@@ -84,8 +71,9 @@ describe("Navigation", () => {
         .should("include", elm.image);
     });
   });
+});
 
-  // Hover over images
+describe("Hover states", () => {
   it("Hover states", () => {
     cy.visit("http://localhost:3000/");
 
@@ -122,6 +110,27 @@ describe("Navigation", () => {
     cy.get('[cy-test="Make It Fisheye"]')
       .realHover("mouse")
       .get('[cy-test="overlay-Make It Fisheye"]')
+      .should("be.visible");
+  });
+});
+
+describe("Responsive design", () => {
+  before(() => {
+    cy.visit("/");
+    cy.viewport("iphone-8", "portrait");
+  });
+
+  it("Burger open menu icon", () => {
+    cy.get('[cy-test="nav"]')
+      .find(`[cy-test="burgerIcon"]`)
+      .should("be.visible");
+  });
+
+  it.only("Burger close menu icon", () => {
+    cy.get('[cy-test="nav"]')
+      .find(`[cy-test="burgerIcon"]`)
+      .click()
+      .find(`[cy-test="closeIcon"]`)
       .should("be.visible");
   });
 });

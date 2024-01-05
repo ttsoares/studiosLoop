@@ -53,6 +53,7 @@ const Nav = () => {
               ))}
             </div>
             <div
+              cy-test="closeIcon"
               onClick={toggleMenu}
               className="p-2 absolute top-12 right-12 text-3xl font-bold"
             >
@@ -60,7 +61,11 @@ const Nav = () => {
             </div>
           </div>
         ) : (
-          <div onClick={toggleMenu} className="p-2 text-3xl font-bold">
+          <div
+            cy-test="burgerIcon"
+            onClick={toggleMenu}
+            className="p-2 text-3xl font-bold"
+          >
             <Image src={Hamburger} alt="Open menu" width={20} height={20} />
           </div>
         )}

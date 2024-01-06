@@ -9,8 +9,8 @@ const CRE_2 = CREATIONS.map((elm) => {
 });
 
 describe("Navigation", () => {
-  it("should navigate to the correct page", () => {
-    cy.visit("http://localhost:3000/");
+  it("desktop: should navigate to the correct page", () => {
+    cy.visit("/");
 
     //Nav
     MENU.forEach((elm) => {
@@ -22,6 +22,20 @@ describe("Navigation", () => {
     //Footer
     MENU.forEach((elm) => {
       cy.get('[cy-test="footer"]').find(`a[cy-test="${elm.link}"]`).click();
+      cy.url().should("include", elm.link);
+      cy.get("h1").contains(elm.text);
+    });
+  });
+
+  it("mobile: should navigate to the correct page", () => {
+    cy.visit("/");
+    cy.viewport("iphone-8", "portrait");
+
+    MENU.forEach((elm) => {
+      cy.get('[cy-test="nav"]').find(`[cy-test="burgerIcon"]`).click();
+
+      cy.get('[cy-test="menu_sm"]').find(`p[cy-test="${elm.link}"]`).click();
+
       cy.url().should("include", elm.link);
       cy.get("h1").contains(elm.text);
     });
@@ -126,7 +140,7 @@ describe("Responsive design", () => {
       .should("be.visible");
   });
 
-  it.only("Burger close menu icon", () => {
+  it("Burger close menu icon", () => {
     cy.get('[cy-test="nav"]')
       .find(`[cy-test="burgerIcon"]`)
       .click()

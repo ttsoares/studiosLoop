@@ -40,10 +40,14 @@ const Nav = () => {
       <div className="md:hidden ">
         {showBM ? (
           <div className="absolute -mt-5 inset-0 w-full min-h-screen  bg-black ">
-            <div className="absolute top-[100px] right-0 w-full h-72 p-10 space-y-3">
+            <div
+              cy-test="menu_sm"
+              className="absolute top-[100px] right-0 w-full h-72 p-10 space-y-3"
+            >
               {MENU_ITENS.map((item, index) => (
                 <div key={index} className="text-lg text-white uppercase">
                   <p
+                    cy-test={item.link}
                     class="hover:text-pink-500 hover:cursor-pointer"
                     onClick={() => routeTo(item.link)}
                   >
@@ -55,7 +59,7 @@ const Nav = () => {
             <div
               cy-test="closeIcon"
               onClick={toggleMenu}
-              className="p-2 absolute top-12 right-12 text-3xl font-bold"
+              className="p-2 absolute top-16 right-12 text-3xl font-bold"
             >
               <Image src={Close} alt="Close menu" width={20} height={20} />
             </div>

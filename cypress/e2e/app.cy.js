@@ -131,20 +131,53 @@ describe("Hover states", () => {
 describe("Responsive design", () => {
   before(() => {
     cy.visit("/");
-    cy.viewport("iphone-8", "portrait");
   });
 
   it("Burger open menu icon", () => {
+    cy.visit("/");
+    cy.viewport("iphone-8", "portrait");
     cy.get('[cy-test="nav"]')
       .find(`[cy-test="burgerIcon"]`)
       .should("be.visible");
   });
 
   it("Burger close menu icon", () => {
+    cy.visit("/");
+    cy.viewport("iphone-8", "portrait");
     cy.get('[cy-test="nav"]')
       .find(`[cy-test="burgerIcon"]`)
       .click()
       .find(`[cy-test="closeIcon"]`)
       .should("be.visible");
+  });
+
+  it("Not show menu MD and LG with SM screen", () => {
+    cy.visit("/");
+    cy.viewport("iphone-8", "portrait");
+    cy.get('[cy-test="nav_MD-LG"]').should("not.be.visible");
+  });
+
+  //------------
+  it("Should have correct grid style for md and above", () => {
+    cy.visit("/");
+    cy.get('[cy-test="creations_grid"]').then(($div) => {
+      const style = window.getComputedStyle($div[0]);
+      const columnCount = style.gridTemplateColumns.split(" ").length;
+      expect(columnCount).to.eq(4); // Expecting 4 columns
+    });
+  });
+
+  it("Should have correct grid style below md", () => {
+    cy.visit("/");
+    cy.viewport("iphone-8", "portrait");
+
+    cy.get('[cy-test="creations"]')
+      .children()
+      .last()
+      .then(($div) => {
+        const style = window.getComputedStyle($div[0]);
+        const columnCount = style.gridTemplateColumns.split(" ").length;
+        expect(columnCount).to.eq(1); // Expecting 1 column
+      });
   });
 });

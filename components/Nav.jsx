@@ -76,7 +76,10 @@ const Nav = () => {
       </div>
 
       {/* MD and LG */}
-      <div className="hidden md:flex flex-1 h-20 items-center justify-end w-full space-x-6 font-bold text-white">
+      <div
+        cy-test="nav_MD-LG"
+        className="hidden md:flex flex-1 h-20 items-center justify-end w-full space-x-6 font-bold text-white"
+      >
         {MENU_ITENS.map((item, index) => (
           <div key={index} className="h-10 group">
             <Link cy-test={item.link} href={item.link}>

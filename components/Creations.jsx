@@ -18,7 +18,10 @@ const Creations = () => {
         </button>
       </div>
 
-      <div className="w-full grid grid-cols-1 md:grid-cols-4 gap-4 text-2xl text-white uppercase ">
+      <div
+        cy-test="creations_grid"
+        className="w-full grid grid-cols-1 md:grid-cols-4 gap-4 text-2xl text-white uppercase "
+      >
         {CREATIONS.map((item, index) => (
           <div
             key={index}
